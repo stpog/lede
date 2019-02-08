@@ -7,18 +7,18 @@ LOGTIME=$(date "+%Y-%m-%d %H:%M:%S")
 
 #sleep 3
 
-/usr/bin/wget --spider --quiet --tries=1 --timeout=3 www.gstatic.com/generate_204
+wget --spider --quiet --timeout=3 http://www.gstatic.com/generate_204
 
 if [ "$?" == "0" ]; then
-	echo '['$LOGTIME'] V2Ray No Problem.'
+        echo '['$LOGTIME'] V2Ray No Problem.'
 else
-	/usr/bin/wget --spider --quiet --tries=1 --timeout=3 www.baidu.com
-	if [ "$?" == "0" ]; then
-		echo '['$LOGTIME'] Problem decteted, restarting V2Ray...'
-		/etc/init.d/v2raypro restart
-	else
-		echo '['$LOGTIME'] Network Problem. Do nothing.'
-	fi
+        wget --spider --quiet --timeout=3 http://www.baidu.com
+        if [ "$?" == "0" ]; then
+                echo '['$LOGTIME'] Problem decteted, restarting V2Ray...'
+                /etc/init.d/v2raypro restart
+        else
+                echo '['$LOGTIME'] Network Problem. Do nothing.'
+        fi
 fi
 
 #sleep 3
